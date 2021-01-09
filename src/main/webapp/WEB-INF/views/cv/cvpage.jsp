@@ -7,7 +7,24 @@
     <title>Resume</title>
     <script type="text/javascript" src="/js/common/jquery.js"></script>
     <script type="text/javascript">
+        $(document).ready(function(){
+            getBoardList();
+        });
 
+        function getEducation(){
+            $.ajax({
+                url:"/cv/education",
+                dataType:"JSON",
+                cache: false,
+                async: true,
+                type:"GET",
+                success: function(obj){},
+                error: function(xhr, status, error){
+                    alert("Failed to get education");
+                }
+
+            });
+        }
     </script>
 </head>
 <body>
