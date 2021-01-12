@@ -7,23 +7,44 @@
     <title>Resume</title>
     <script type="text/javascript" src="/js/common/jquery.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            getBoardList();
+        $(document).ready(function () {
+            getEducation();
         });
 
-        function getEducation(){
+        function getEducation() {
             $.ajax({
-                url:"/cv/education",
-                dataType:"JSON",
+                url: "/cv/education",
+                dataType: "JSON",
                 cache: false,
                 async: true,
-                type:"GET",
-                success: function(obj){},
-                error: function(xhr, status, error){
+                type: "GET",
+                success: function (obj) {
+                    getEducationCallback(obj);
+                },
+                error: function (xhr, status, error) {
                     alert("Failed to get education");
                 }
 
             });
+        }
+
+        function getEducationCallback(obj) {
+            if (obj != null) {
+
+                var eduSeq = obj.seq;
+                var eduStartdate = obj.startdate;
+                var eduEnddate = obj.enddate;
+                var eduInstitute = obj.institute;
+                var eduMajor = obj.major;
+                var eduGpa = obj.gpa;
+                var eduEtc = obj.etc;
+
+                $("#period").text(eduStartdate + "~" + eduEnddate);
+                $("#institute").text(eduInstitute);
+                $("#major").text(eduMajor);
+                $("#gpa").text(eduGpa);
+                $("#etc").text(eduEtc);
+            }
         }
     </script>
 </head>
@@ -44,19 +65,19 @@
             <tbody>
             <tr>
 
-                <td style="width: 4rem;">
+                <td id="period" style="width: 4rem;">
                     기간
                 </td>
-                <td style="width: 10rem;">
+                <td id="institute" style="width: 10rem;">
                     Name of Institute
                 </td>
             </tr>
             <tr>
-                <td>Major</td>
-                <td>GPA</td>
+                <td id="major">Major</td>
+                <td id="gpa">GPA</td>
             </tr>
             <tr>
-                <td colspan="2">etc.</td>
+                <td id="etc" colspan="2">etc.</td>
             </tr>
             </tbody>
         </table>
