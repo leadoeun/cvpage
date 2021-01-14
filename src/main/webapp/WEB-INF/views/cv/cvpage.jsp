@@ -83,6 +83,34 @@
         </table>
     </div>
 </div>
+<div>
+    <h2>Major Achievements</h2>
+    <div>
+        <p>
+            Content does not exist
+        </p>
+        <button>New</button>
+    </div>
+    <div>
+        <table border="1px">
+            <tbody>
+            <tr>
+                <td style="width: 6rem;">Award</td>
+                <td style="width: 20rem;">Award Description</td>
+            </tr>
+            <tr>
+                <td style="width: 6rem;">Club</td>
+                <td style="width: 20rem;">Club Description</td>
+            </tr>
+            <tr>
+                <td style="width: 6rem;">Certification</td>
+                <td style="width: 20rem;">Certification Description</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>
