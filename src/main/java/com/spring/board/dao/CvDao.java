@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Repository
 public class CvDao {
@@ -13,7 +14,7 @@ public class CvDao {
 
     private static final String NAMESPACE = "com.spring.board.cvMapper";
 
-    public EducationDto getEducation(EducationDto educationDto) {
-        return sqlSession.selectOne(NAMESPACE + ".getEducation", educationDto);
+    public List<EducationDto> getEducation(EducationDto educationDto) {
+        return sqlSession.selectList(NAMESPACE + ".getEducation", educationDto);
     }
 }

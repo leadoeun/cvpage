@@ -11,6 +11,10 @@
             getEducation();
         });
 
+        function goEducationWrite(){
+            location.href="/cv/educationWrite";
+        }
+
         function getEducation() {
             $.ajax({
                 url: "/cv/education",
@@ -31,20 +35,60 @@
         function getEducationCallback(obj) {
             if (obj != null) {
 
-                var eduSeq = obj.seq;
-                var eduStartdate = obj.startdate;
-                var eduEnddate = obj.enddate;
-                var eduInstitute = obj.institute;
-                var eduMajor = obj.major;
-                var eduGpa = obj.gpa;
-                var eduEtc = obj.etc;
+                var edulist=obj.list;
+                var html="";
+                if(edulist.length>0){
+                    for (var i=0; i<edulist.length; i++){
+                        var eduSeq = edulist[i].seq;
+                        var eduStartdate = edulist[i].startdate;
+                        var eduEnddate = edulist[i].enddate;
+                        var eduInstitute = edulist[i].institute;
+                        var eduMajor = edulist[i].major;
+                        var eduGpa = edulist[i].gpa;
+                        var eduEtc = edulist[i].etc;
 
-                $("#period").text(eduStartdate + "~" + eduEnddate);
-                $("#institute").text(eduInstitute);
-                $("#major").text(eduMajor);
-                $("#gpa").text(eduGpa);
-                $("#etc").text(eduEtc);
+
+                        html+='<tr>';
+                        html+='<td id="period" style="width: 4rem;">';
+                        html+=eduStartdate+"~"+eduEnddate;
+                        html+='</td>';
+                        html+='<td id="institute" style="width: 10rem;">';
+                        html+=eduInstitute;
+                        html+='</td>';
+                        html+='</tr>';
+                        html+='<tr>';
+                        html+='<td id="major">';
+                        html+=eduMajor;
+                        html+='</td>';
+                        html+='<td id="gpa">';
+                        html+=eduGpa;
+                        html+='</td>';
+                        html+='</tr>';
+                        html+='<tr>';
+                        html+='<td id="etc" colspan="2">';
+                        html+=eduEtc;
+                        html+='</td>';
+                        html+='</tr>';
+                    }
+
+
+
+
+                    $("#edu_tbody").html(html);
+                }
+                else{
+                    html+=`<p>
+                        Content does not exist
+                    </p>
+                    <button type='button' onclick='javascript:goEducationWrite();'>New</button>
+                    `
+                    $("#eduNotExist").html(html);
+                }
+
+
+
             }
+
         }
     </script>
 </head>
@@ -54,31 +98,13 @@
 </div>
 <div>
     <h2>Education</h2>
-    <div>
-        <p>
-            Content does not exist
-        </p>
-        <button>New</button>
+    <div id="eduNotExist">
+
     </div>
     <div>
         <table border="1px">
-            <tbody>
-            <tr>
+            <tbody id="edu_tbody">
 
-                <td id="period" style="width: 4rem;">
-                    기간
-                </td>
-                <td id="institute" style="width: 10rem;">
-                    Name of Institute
-                </td>
-            </tr>
-            <tr>
-                <td id="major">Major</td>
-                <td id="gpa">GPA</td>
-            </tr>
-            <tr>
-                <td id="etc" colspan="2">etc.</td>
-            </tr>
             </tbody>
         </table>
     </div>

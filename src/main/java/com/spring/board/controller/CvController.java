@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/cv")
@@ -25,8 +27,15 @@ public class CvController {
 
     @RequestMapping(value="/education")
     @ResponseBody
-    public EducationDto getEducation(HttpServletRequest request, HttpServletResponse response, EducationDto educationDto){
-        EducationDto educationDto1 = cvService.getEducation(educationDto);
-        return educationDto1;
+    public HashMap<String, Object> getEducation(HttpServletRequest request, HttpServletResponse response, EducationDto educationDto){
+        List<EducationDto> educationDto1 = cvService.getEducation(educationDto);
+        HashMap<String,Object> resultMap= new HashMap<String, Object>();
+        resultMap.put("list",educationDto1);
+        return resultMap;
+    }
+
+    @RequestMapping(value="/educationWrite")
+    public String educationWrite(HttpServletRequest request, HttpServletResponse response){
+        return "cv/educationWrite";
     }
 }
