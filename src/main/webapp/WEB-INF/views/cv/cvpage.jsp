@@ -5,7 +5,7 @@
 <html>
 <head lang="en">
     <meta http-equiv="Content-Type" name="viewport"
-          content="text/html; charset=UTF-8; width=device-width; initial-scale=1">
+          content="text/html, charset=UTF-8, width=device-width, initial-scale=1">
     <title>Resume</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -38,6 +38,25 @@
 
             });
         }
+
+        function deleteEducation(sequence){
+            $.ajax({
+                url:"/cv/deleteEducation",
+                data:{
+                    seq: sequence
+                },
+                dataType: "JSON",
+                cache: false,
+                async: true,
+                type: "POST",
+                success: function(obj){
+                    deleteEducationCallback(obj);
+                },
+                error: function(xhr, status, error){}
+            });
+        }
+
+
         function getAchievements() {
             $.ajax({
                 url: "/cv/achievements",
@@ -60,6 +79,7 @@
 
                 var edulist = obj.list;
                 var html = "";
+                var html_button="";
                 if (edulist.length > 0) {
                     for (var i = 0; i < edulist.length; i++) {
                         var eduSeq = edulist[i].seq;
@@ -72,7 +92,7 @@
 
 
 
-                        html += `<tr>
+                        html += `<table class="table table-striped"> <tr>
   <td id="period" style="width: 4rem;">
     \${eduStartdate} ~ \${eduEnddate}
   </td>
@@ -92,9 +112,14 @@
   <td id="etc" colspan="2">
     \${eduEtc}
   </td>
-</tr>`
+</tr></table>
+<button type='button' onclick='javascript:deleteEducation('\${eduSeq}');'>Delete</button>
+<br>
+`
                     }
                     $("#edu_tbody").html(html);
+                    html_button +=`<button type='button' onclick='javascript:goEducationWrite();'>New</button>`
+                    $("#button").html(html_button);
                 } else {
                     html += `<p>
                         Content does not exist
@@ -121,12 +146,9 @@
     <div id="eduNotExist">
 
     </div>
-    <div>
-        <table class="table table-striped">
-            <tbody id="edu_tbody">
-
-            </tbody>
-        </table>
+    <div id="edu_tbody">
+    </div>
+    <div id="button">
     </div>
 </div>
 <div>

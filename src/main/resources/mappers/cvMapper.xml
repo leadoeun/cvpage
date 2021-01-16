@@ -12,4 +12,38 @@
             ,  etc
         From education
     </select>
+
+    <insert id="insertEducation" parameterType="com.spring.board.dto.EducationDto">
+        <selectKey resultType="int" keyProperty="seq" order="BEFORE">
+            SELECT IFNULL(MAX(SEQ),0)+1
+            FROM education
+        </selectKey>
+
+        INSERT
+        INTO education(
+            seq
+        ,  startdate
+        ,  enddate
+        ,  institute
+        ,  major
+        ,  gpa
+        ,  etc
+        )
+        values(
+            #{seq}
+        ,  #{startdate}
+        ,  #{enddate}
+        ,  #{institute}
+        ,  #{major}
+        ,  #{gpa}
+        ,  #{etc}
+        )
+
+    </insert>
+
+    <delete id="deleteEducation" parameterType="com.spring.board.dto.EducationDto">
+        delete
+        from education
+        where seq=#{seq}
+    </delete>
 </mapper>

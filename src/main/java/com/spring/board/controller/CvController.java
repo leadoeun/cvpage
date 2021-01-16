@@ -40,6 +40,22 @@ public class CvController {
         return "cv/educationWrite";
     }
 
+    @RequestMapping(value="/insertEducation")
+    @ResponseBody
+    public EducationDto insertEducation(HttpServletRequest request, HttpServletResponse response, EducationDto educationDto){
+        EducationDto educationDto1=cvService.insertEducation(educationDto);
+
+        return educationDto1;
+    }
+
+    @RequestMapping(value="/deleteEducation")
+    @ResponseBody
+    public EducationDto deleteEducation(HttpServletRequest request, HttpServletResponse response, EducationDto educationDto){
+        EducationDto educationDto1=cvService.deleteEducation(educationDto);
+
+        return educationDto1;
+    }
+
     @RequestMapping(value = "/achievements")
     @ResponseBody
     public HashMap<String, Object> getAchievements(HttpServletRequest request, HttpServletResponse response, AchievementsDto achievementsDto) {

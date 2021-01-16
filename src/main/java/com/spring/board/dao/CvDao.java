@@ -19,7 +19,16 @@ public class CvDao {
         return sqlSession.selectList(NAMESPACE + ".getEducation", educationDto);
     }
 
+    public int insertEducation(EducationDto educationDto){
+        return sqlSession.insert(NAMESPACE+".insertEducation", educationDto);
+    }
+
+    public int deleteEducation(EducationDto educationDto){
+        return sqlSession.delete(NAMESPACE+".deleteEducation",educationDto);
+    }
+
     public List<AchievementsDto> getAchievements(AchievementsDto achievementsDto){
         return sqlSession.selectList(NAMESPACE+".getAchievements",achievementsDto);
     }
+
 }

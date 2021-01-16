@@ -8,6 +8,7 @@ public class EducationDto {
     private String major;
     private double gpa;
     private String etc;
+    private String result;
 
     public int getSeq() {
         return seq;
@@ -65,6 +66,14 @@ public class EducationDto {
         this.etc = etc;
     }
 
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
     @Override
     public String toString() {
         return "EducationDto{" +
@@ -75,6 +84,7 @@ public class EducationDto {
                 ", major='" + major + '\'' +
                 ", gpa=" + gpa +
                 ", etc='" + etc + '\'' +
+                ", result='" + result + '\'' +
                 '}';
     }
 }

@@ -1,70 +1,70 @@
 package com.spring.board.dto;
 
 public class AchievementsDto {
-    private String Award;
-    private String Awardinfo;
-    private String Club;
-    private String Clubinfo;
-    private String Certification;
-    private String Certificationinfo;
+    private String award;
+    private String awardinfo;
+    private String club;
+    private String clubinfo;
+    private String certification;
+    private String certificationinfo;
 
     public String getAward() {
-        return Award;
+        return award;
     }
 
     public void setAward(String award) {
-        Award = award;
+        this.award = award;
     }
 
     public String getAwardinfo() {
-        return Awardinfo;
+        return awardinfo;
     }
 
     public void setAwardinfo(String awardinfo) {
-        Awardinfo = awardinfo;
+        this.awardinfo = awardinfo;
     }
 
     public String getClub() {
-        return Club;
+        return club;
     }
 
     public void setClub(String club) {
-        Club = club;
+        this.club = club;
     }
 
     public String getClubinfo() {
-        return Clubinfo;
+        return clubinfo;
     }
 
     public void setClubinfo(String clubinfo) {
-        Clubinfo = clubinfo;
+        this.clubinfo = clubinfo;
     }
 
     public String getCertification() {
-        return Certification;
+        return certification;
     }
 
     public void setCertification(String certification) {
-        Certification = certification;
+        this.certification = certification;
     }
 
     public String getCertificationinfo() {
-        return Certificationinfo;
+        return certificationinfo;
     }
 
     public void setCertificationinfo(String certificationinfo) {
-        Certificationinfo = certificationinfo;
+        this.certificationinfo = certificationinfo;
     }
 
     @Override
     public String toString() {
         return "AchievementsDto{" +
-                "Award='" + Award + '\'' +
-                ", Awardinfo='" + Awardinfo + '\'' +
-                ", Club='" + Club + '\'' +
-                ", Clubinfo='" + Clubinfo + '\'' +
-                ", Certification='" + Certification + '\'' +
-                ", Certificationinfo='" + Certificationinfo + '\'' +
+                "Award='" + award + '\'' +
+                ", Awardinfo='" + awardinfo + '\'' +
+                ", Club='" + club + '\'' +
+                ", Clubinfo='" + clubinfo + '\'' +
+                ", Certification='" + certification + '\'' +
+                ", Certificationinfo='" + certificationinfo + '\'' +
                 '}';
     }
 }

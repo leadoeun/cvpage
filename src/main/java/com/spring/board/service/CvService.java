@@ -12,18 +12,45 @@ import java.util.List;
 public class CvService {
 
     @Autowired
-    private CvDao educationDao;
+    private CvDao cvDao;
 
     public List<EducationDto> getEducation(EducationDto educationDto) {
 
-        return educationDao.getEducation(educationDto);
+        return cvDao.getEducation(educationDto);
     }
 
-    @Autowired
-    private CvDao achievementsDao;
+    public EducationDto insertEducation(EducationDto educationDto){
+
+        EducationDto educationDto1 =new EducationDto();
+
+        int insertCnt=0;
+        insertCnt=cvDao.insertEducation(educationDto);
+
+        if (insertCnt>0){
+            educationDto1.setResult("success");
+        }
+        else{
+            educationDto1.setResult("fail");
+        }
+        return educationDto1;
+    }
+
+    public EducationDto deleteEducation(EducationDto educationDto){
+        EducationDto educationDto1=new EducationDto();
+
+        int deleteCnt=cvDao.deleteEducation(educationDto);
+
+        if (deleteCnt>0){
+            educationDto1.setResult("success");
+        }
+        else{
+            educationDto1.setResult("fail");
+        }
+        return educationDto1;
+    }
 
     public List<AchievementsDto> getAchievements(AchievementsDto achievementsDto){
-        return achievementsDao.getAchievements(achievementsDto);
+        return cvDao.getAchievements(achievementsDto);
     }
 
 
