@@ -71,46 +71,26 @@
                         var eduEtc = edulist[i].etc;
 
 
-                        // html += '<tr>';
-                        // html += '<td id="period" style="width: 4rem;">';
-                        // html += eduStartdate + "~" + eduEnddate;
-                        // html += '</td>';
-                        // html += '<td id="institute" style="width: 10rem;">';
-                        // html += eduInstitute;
-                        // html += '</td>';
-                        // html += '</tr>';
-                        // html += '<tr>';
-                        // html += '<td id="major">';
-                        // html += eduMajor;
-                        // html += '</td>';
-                        // html += '<td id="gpa">';
-                        // html += eduGpa;
-                        // html += '</td>';
-                        // html += '</tr>';
-                        // html += '<tr>';
-                        // html += '<td id="etc" colspan="2">';
-                        // html += eduEtc;
-                        // html += '</td>';
-                        // html += '</tr>';
+
                         html += `<tr>
   <td id="period" style="width: 4rem;">
-    ${eduStartdate} ~ ${eduEnddate}
+    \${eduStartdate} ~ \${eduEnddate}
   </td>
-  <td id="institude" style="width: 10rem;">
-    ${eduInstitude}
+  <td id="institute" style="width: 10rem;">
+    \${eduInstitute}
   </td>
 </tr>
 <tr>
   <td id="major">
-    ${eduMajor}
+    \${eduMajor}
   </td>
   <td id="gpa">
-    ${eduGpa}
+    \${eduGpa}
   </td>
 </tr>
 <tr>
   <td id="etc" colspan="2">
-    ${eduEtc}
+    \${eduEtc}
   </td>
 </tr>`
                     }
