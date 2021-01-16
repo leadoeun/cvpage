@@ -1,5 +1,6 @@
 package com.spring.board.dao;
 
+import com.spring.board.dto.AchievementsDto;
 import com.spring.board.dto.EducationDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -16,5 +17,9 @@ public class CvDao {
 
     public List<EducationDto> getEducation(EducationDto educationDto) {
         return sqlSession.selectList(NAMESPACE + ".getEducation", educationDto);
+    }
+
+    public List<AchievementsDto> getAchievements(AchievementsDto achievementsDto){
+        return sqlSession.selectList(NAMESPACE+".getAchievements",achievementsDto);
     }
 }

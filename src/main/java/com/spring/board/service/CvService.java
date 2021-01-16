@@ -1,6 +1,7 @@
 package com.spring.board.service;
 
 import com.spring.board.dao.CvDao;
+import com.spring.board.dto.AchievementsDto;
 import com.spring.board.dto.EducationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,13 @@ public class CvService {
     public List<EducationDto> getEducation(EducationDto educationDto) {
 
         return educationDao.getEducation(educationDto);
+    }
+
+    @Autowired
+    private CvDao achievementsDao;
+
+    public List<AchievementsDto> getAchievements(AchievementsDto achievementsDto){
+        return achievementsDao.getAchievements(achievementsDto);
     }
 
 

@@ -31,6 +31,22 @@
 
             });
         }
+        function getAchievements() {
+            $.ajax({
+                url: "/cv/achievements",
+                dataType: "JSON",
+                cache: false,
+                async: true,
+                type: "GET",
+                success: function (obj) {
+                    getAchievementsCallback(obj);
+                },
+                error: function (xhr, status, error) {
+                    alert("Failed to get major achievements");
+                }
+
+            });
+        }
 
         function getEducationCallback(obj) {
             if (obj != null) {

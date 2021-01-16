@@ -1,5 +1,6 @@
 package com.spring.board.controller;
 
+import com.spring.board.dto.AchievementsDto;
 import com.spring.board.dto.BoardDto;
 import com.spring.board.dto.EducationDto;
 import com.spring.board.service.CvService;
@@ -38,4 +39,12 @@ public class CvController {
     public String educationWrite(HttpServletRequest request, HttpServletResponse response){
         return "cv/educationWrite";
     }
+
+    @RequestMapping(value="/achievements")
+    @ResponseBody
+    public HashMap<String, Object> getAchievements(HttpServletRequest request, HttpServletResponse response, EducationDto educationDto){
+        List<AchievementsDto> achievementsDto1 = cvService.getAchievements(achievementsDto);
+        HashMap<String,Object> achresultMap= new HashMap<String, Object>();
+        achresultMap.put("list",achievementsDto1);
+        return achresultMap;
 }
