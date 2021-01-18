@@ -56,6 +56,20 @@
             });
         }
 
+        function deleteEducationCallback(obj){
+            if(obj!=null){
+                var result=obj.result;
+
+                if (result=="success"){
+                    alert("successfully deleted");
+
+                } else{
+                    alert("failed to delete");
+                    return;
+                }
+            }
+        }
+
 
         function getAchievements() {
             $.ajax({
