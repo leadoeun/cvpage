@@ -3,6 +3,7 @@ package com.spring.board.service;
 import com.spring.board.dao.CvDao;
 import com.spring.board.dto.AchievementsDto;
 import com.spring.board.dto.EducationDto;
+import com.spring.board.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,38 @@ public class CvService {
 
     @Autowired
     private CvDao cvDao;
+
+    public UserDto getUser(){
+        return cvDao.getUser();
+    }
+
+    public UserDto registerUser(UserDto userDto){
+        UserDto userDto1=new UserDto();
+        int insertCnt=0;
+        insertCnt=cvDao.registerUser(userDto);
+
+        if (insertCnt>0){
+            userDto1.setResult("success");
+        }
+        else {
+            userDto1.setResult("fail");
+        }
+        return userDto1;
+    }
+
+    public UserDto deleteUser(UserDto userDto){
+        UserDto userDto1=new UserDto();
+        int deleteCnt=0;
+        deleteCnt=cvDao.deleteUser(userDto);
+
+        if (deleteCnt>0){
+            userDto1.setResult("success");
+        }
+        else {
+            userDto1.setResult("fail");
+        }
+        return userDto1;
+    }
 
     public List<EducationDto> getEducation(EducationDto educationDto) {
 

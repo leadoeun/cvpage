@@ -2,6 +2,7 @@ package com.spring.board.dao;
 
 import com.spring.board.dto.AchievementsDto;
 import com.spring.board.dto.EducationDto;
+import com.spring.board.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,18 @@ public class CvDao {
     private SqlSession sqlSession;
 
     private static final String NAMESPACE = "com.spring.board.cvMapper";
+
+    public UserDto getUser(){
+        return sqlSession.selectOne(NAMESPACE+".getUser");
+    }
+
+    public int registerUser(UserDto userDto){
+        return sqlSession.insert(NAMESPACE+".registerUser", userDto);
+    }
+
+    public int deleteUser(UserDto userDto){
+        return sqlSession.delete(NAMESPACE+".deleteUser", userDto);
+    }
 
     public List<EducationDto> getEducation(EducationDto educationDto) {
         return sqlSession.selectList(NAMESPACE + ".getEducation", educationDto);

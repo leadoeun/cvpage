@@ -3,11 +3,13 @@ package com.spring.board.controller;
 import com.spring.board.dto.AchievementsDto;
 import com.spring.board.dto.BoardDto;
 import com.spring.board.dto.EducationDto;
+import com.spring.board.dto.UserDto;
 import com.spring.board.service.CvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +25,28 @@ public class CvController {
 
     @RequestMapping(value = "/cvpage")
     public String cvpage(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("cv/cvpage");
+        UserDto userDto=cvService.getUser();
+        modelAndView.addObject("userDto",userDto);
+
         return "cv/cvpage";
+    }
+
+    @RequestMapping(value="/registerName")
+    @ResponseBody
+    public UserDto registerUser(HttpServletRequest request, HttpServletResponse response,UserDto userDto){
+        UserDto userDto1=cvService.registerUser(userDto);
+
+        return userDto1;
+    }
+
+    @RequestMapping(value="/deleteName")
+    @ResponseBody
+    public UserDto deleteUser(HttpServletRequest request, HttpServletResponse response,UserDto userDto){
+        UserDto userDto1=cvService.deleteUser(userDto);
+
+        return userDto1;
     }
 
     @RequestMapping(value = "/education")

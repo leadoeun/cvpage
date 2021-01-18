@@ -18,6 +18,47 @@
             getEducation();
         });
 
+        function registerName(){
+            $.ajax({
+                url: "/cv/registerName",
+                data: {
+                    name:$("#user_name").val()
+                },
+                dataType:"JSON",
+                cache: false,
+                async: true,
+                type:"POST",
+                success: function(obj){
+                    alert("Name registered");
+                    location.reload(true);
+                    location.href = location.href;
+                    history.go(0);
+                },
+                error: function(xhr, status, error){
+                    alert("Failed to register name");
+                }
+            })
+        }
+
+        function deleteName(){
+            $.ajax({
+                url:"/cv/deleteName",
+                dataType:"JSON",
+                cache: false,
+                async: true,
+                type: "POST",
+                success: function(obj){
+                    alert("Successfully deleted");
+                    location.reload(true);
+                    location.href = location.href;
+                    history.go(0);
+                },
+                error: function(xhr, status, error){
+                    alert("Failed to delete name");
+                }
+            })
+        }
+
         function goEducationWrite() {
             location.href = "/cv/educationWrite";
         }
@@ -62,7 +103,9 @@
 
                 if (result=="success"){
                     alert("successfully deleted");
-
+                    location.reload(true);
+                    location.href = location.href;
+                    history.go(0);
                 } else{
                     alert("failed to delete");
                     return;
@@ -127,7 +170,7 @@
     \${eduEtc}
   </td>
 </tr></table>
-<button type='button' onclick='javascript:deleteEducation('\${eduSeq}');'>Delete</button>
+<button type="button" onclick="javascript:deleteEducation(\${eduSeq});">Delete</button>
 <br>
 `
                     }
@@ -151,7 +194,10 @@
 </head>
 <body>
 <div>
+    <input id="user_name" placeholder="Please enter your name"/>
+    <button type="button" onclick="javascript:registerName();">Register</button>
     <h1>Doeun Lee</h1>
+    <button type="button" onclick="javascript:deleteName();">Delete</button>
 </div>
 <div>
     <br/>
