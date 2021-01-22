@@ -82,9 +82,38 @@ public class CvService {
         return educationDto1;
     }
 
-    public List<AchievementsDto> getAchievements(AchievementsDto achievementsDto){
-        return cvDao.getAchievements(achievementsDto);
+    public List<AchievementsDto> getAchievements(){
+        return cvDao.getAchievements();
     }
 
+    public AchievementsDto insertAchievements(AchievementsDto achievementsDto){
+
+        AchievementsDto achievementsDto1 =new AchievementsDto();
+
+        int insertCnt=0;
+        insertCnt=cvDao.insertAchievements(achievementsDto);
+
+        if (insertCnt>0){
+            achievementsDto1.setResult("success");
+        }
+        else{
+            achievementsDto1.setResult("fail");
+        }
+        return achievementsDto1;
+    }
+
+    public AchievementsDto deleteAchievements(AchievementsDto achievementsDto){
+        AchievementsDto achievementsDto1=new AchievementsDto();
+
+        int deleteCnt=cvDao.deleteAchievements(achievementsDto);
+
+        if (deleteCnt>0){
+            achievementsDto1.setResult("success");
+        }
+        else{
+            achievementsDto1.setResult("fail");
+        }
+        return achievementsDto1;
+    }
 
 }

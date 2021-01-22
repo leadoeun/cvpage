@@ -18,42 +18,42 @@
             getEducation();
         });
 
-        function registerName(){
+        function registerName() {
             $.ajax({
                 url: "/cv/registerName",
                 data: {
-                    name:$("#user_name").val()
+                    name: $("#user_name").val()
                 },
-                dataType:"JSON",
+                dataType: "JSON",
                 cache: false,
                 async: true,
-                type:"POST",
-                success: function(obj){
+                type: "POST",
+                success: function (obj) {
                     alert("Name registered");
                     location.reload(true);
                     location.href = location.href;
                     history.go(0);
                 },
-                error: function(xhr, status, error){
+                error: function (xhr, status, error) {
                     alert("Failed to register name");
                 }
             })
         }
 
-        function deleteName(){
+        function deleteName() {
             $.ajax({
-                url:"/cv/deleteName",
-                dataType:"JSON",
+                url: "/cv/deleteName",
+                dataType: "JSON",
                 cache: false,
                 async: true,
                 type: "POST",
-                success: function(obj){
+                success: function (obj) {
                     alert("Successfully deleted");
                     location.reload(true);
                     location.href = location.href;
                     history.go(0);
                 },
-                error: function(xhr, status, error){
+                error: function (xhr, status, error) {
                     alert("Failed to delete name");
                 }
             })
@@ -80,55 +80,38 @@
             });
         }
 
-        function deleteEducation(sequence){
+        function deleteEducation(sequence) {
             $.ajax({
-                url:"/cv/deleteEducation",
-                data:{
+                url: "/cv/deleteEducation",
+                data: {
                     seq: sequence
                 },
                 dataType: "JSON",
                 cache: false,
                 async: true,
                 type: "POST",
-                success: function(obj){
+                success: function (obj) {
                     deleteEducationCallback(obj);
                 },
-                error: function(xhr, status, error){}
+                error: function (xhr, status, error) {
+                }
             });
         }
 
-        function deleteEducationCallback(obj){
-            if(obj!=null){
-                var result=obj.result;
+        function deleteEducationCallback(obj) {
+            if (obj != null) {
+                var result = obj.result;
 
-                if (result=="success"){
+                if (result == "success") {
                     alert("successfully deleted");
                     location.reload(true);
                     location.href = location.href;
                     history.go(0);
-                } else{
+                } else {
                     alert("failed to delete");
                     return;
                 }
             }
-        }
-
-
-        function getAchievements() {
-            $.ajax({
-                url: "/cv/achievements",
-                dataType: "JSON",
-                cache: false,
-                async: true,
-                type: "GET",
-                success: function (obj) {
-                    getAchievementsCallback(obj);
-                },
-                error: function (xhr, status, error) {
-                    alert("Failed to get major achievements");
-                }
-
-            });
         }
 
         function getEducationCallback(obj) {
@@ -136,7 +119,7 @@
 
                 var edulist = obj.list;
                 var html = "";
-                var html_button="";
+                var html_button = "";
                 if (edulist.length > 0) {
                     for (var i = 0; i < edulist.length; i++) {
                         var eduSeq = edulist[i].seq;
@@ -146,7 +129,6 @@
                         var eduMajor = edulist[i].major;
                         var eduGpa = edulist[i].gpa;
                         var eduEtc = edulist[i].etc;
-
 
 
                         html += `<table class="table table-striped"> <tr>
@@ -175,7 +157,7 @@
 `
                     }
                     $("#edu_tbody").html(html);
-                    html_button +=`<button class='btn btn-dark' type='button' onclick='javascript:goEducationWrite();'>New</button>`
+                    html_button += `<button class='btn btn-dark' type='button' onclick='javascript:goEducationWrite();'>New</button>`
                     $("#button").html(html_button);
                 } else {
                     html += `<p>
@@ -190,6 +172,77 @@
             }
 
         }
+
+        function makeAchievementsInput(self){
+            $(self).parent().append('<form id="achievementsForm" name="achievementsForm">' +
+                '<input id="award" name="award" placeholder="Please enter your name"/>' +
+                '<input id="awardinfo" name="awardinfo" placeholder="Please enter your name"/>' +
+                '<input id="club" name="club" placeholder="Please enter your name"/>' +
+                '<input id="clubinfo" name="clubinfo" placeholder="Please enter your name"/>' +
+                '<input id="certification" name="certification" placeholder="Please enter your name"/>' +
+                '<input id="certificationinfo" name="certificationinfo" placeholder="Please enter your name"/></form>' +
+                '<button type="button" class="btn btn-black" onclick="javascript:insertAchievements();">Send</button>');
+
+        }
+
+        function insertAchievements() {
+            $.ajax({
+                url: "/cv/insertAchievements",
+                data: $("#achievementsForm").serialize(),
+                dataType: "JSON",
+                cache: false,
+                async: true,
+                type: "POST",
+                success: function (obj) {
+                    if (obj != null) {
+                        var result = obj.result;
+
+                        if (result == "success") {
+                            alert("successfully uploaded");
+                            location.reload(true);
+                            location.href = location.href;
+                            history.go(0);
+                        } else {
+                            alert("failed to upload");
+                            return;
+                        }
+                    }
+                },
+                error: function (xhr, status, error) {
+                }
+            });
+        }
+
+        function deleteAchievements(sequence) {
+            $.ajax({
+                url: "/cv/deleteAchievements",
+                data: {
+                    seq: sequence
+                },
+                dataType: "JSON",
+                cache: false,
+                async: true,
+                type: "POST",
+                success: function (obj) {
+                    if (obj != null) {
+                        var result = obj.result;
+
+                        if (result == "success") {
+                            alert("successfully deleted");
+                            location.reload(true);
+                            location.href = location.href;
+                            history.go(0);
+                        } else {
+                            alert("failed to delete");
+                            return;
+                        }
+                    }
+                },
+                error: function (xhr, status, error) {
+                }
+            });
+        }
+
     </script>
 </head>
 <body>
@@ -221,31 +274,42 @@
     <br/>
     <h2>Major Achievements</h2>
     <br/>
-    <div>
-        <p>
-            Content does not exist
-        </p>
-        <button class="btn btn-dark">New</button>
-    </div>
-    <div>
-        <table class="table table-striped">
-            <tbody>
-            <tr>
-                <td style="width: 6rem;">Award</td>
-                <td style="width: 20rem;">Award Description</td>
-            </tr>
-            <tr>
-                <td style="width: 6rem;">Club</td>
-                <td style="width: 20rem;">Club Description</td>
-            </tr>
-            <tr>
-                <td style="width: 6rem;">Certification</td>
-                <td style="width: 20rem;">Certification Description</td>
-            </tr>
+    <c:choose>
+        <c:when test="${empty AchievementsList}">
+            <div>
+                <p>
+                    Content does not exist
+                </p>
+                <button class="btn btn-dark" onclick="javascript:makeAchievementsInput(this);">New</button>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div>
+                <button class="btn btn-dark" onclick="javascript:makeAchievementsInput(this);">New</button>
+                <c:forEach var="name" items="${AchievementsList}" varStatus="status">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td style="width: 6rem;">${name.award}</td>
+                            <td style="width: 20rem;">${name.awardinfo}</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 6rem;">${name.club}</td>
+                            <td style="width: 20rem;">${name.clubinfo}</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 6rem;">${name.certification}</td>
+                            <td style="width: 20rem;">${name.certificationinfo}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-dark" onclick="javascript:deleteAchievements(${name.seq});">Delete</button>
+                </c:forEach>
+            </div>
+        </c:otherwise>
+    </c:choose>
 
-            </tbody>
-        </table>
-    </div>
+
 </div>
 
 </body>

@@ -40,8 +40,15 @@ public class CvDao {
         return sqlSession.delete(NAMESPACE+".deleteEducation",educationDto);
     }
 
-    public List<AchievementsDto> getAchievements(AchievementsDto achievementsDto){
-        return sqlSession.selectList(NAMESPACE+".getAchievements",achievementsDto);
+    public List<AchievementsDto> getAchievements(){
+        return sqlSession.selectList(NAMESPACE+".getAchievements");
     }
 
+    public int insertAchievements(AchievementsDto achievementsDto){
+        return sqlSession.insert(NAMESPACE+".insertAchievements",achievementsDto);
+    }
+
+    public int deleteAchievements(AchievementsDto achievementsDto){
+        return sqlSession.delete(NAMESPACE+".deleteAchievements",achievementsDto);
+    }
 }

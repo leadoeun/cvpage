@@ -29,7 +29,8 @@ public class CvController {
         modelAndView.setViewName("cv/cvpage");
         UserDto userDto=cvService.getUser();
         modelAndView.addObject("userDto",userDto);
-
+        List<AchievementsDto> achievementsDtoList = cvService.getAchievements();
+        modelAndView.addObject("AchievementsList",achievementsDtoList);
         return modelAndView;
     }
 
@@ -79,12 +80,21 @@ public class CvController {
         return educationDto1;
     }
 
-    @RequestMapping(value = "/achievements")
+    @RequestMapping(value="/insertAchievements")
     @ResponseBody
-    public HashMap<String, Object> getAchievements(HttpServletRequest request, HttpServletResponse response, AchievementsDto achievementsDto) {
-        List<AchievementsDto> achievementsDto1 = cvService.getAchievements(achievementsDto);
-        HashMap<String, Object> achresultMap = new HashMap<String, Object>();
-        achresultMap.put("list", achievementsDto1);
-        return achresultMap;
+    public AchievementsDto insertAchievements(HttpServletRequest request, HttpServletResponse response, AchievementsDto achievementsDto){
+        AchievementsDto achievementsDto1=cvService.insertAchievements(achievementsDto);
+
+        return achievementsDto1;
     }
+
+    @RequestMapping(value="/deleteAchievements")
+    @ResponseBody
+    public AchievementsDto deleteAchievements(HttpServletRequest request, HttpServletResponse response, AchievementsDto achievementsDto){
+        AchievementsDto achievementsDto1=cvService.deleteAchievements(achievementsDto);
+
+        return achievementsDto1;
+    }
+
+
 }

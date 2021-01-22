@@ -77,7 +77,7 @@
         where seq=#{seq}
     </delete>
 
-    <select id="getAchievements" parameterType="com.spring.board.dto.AchievementsDto" resultType="com.spring.board.dto.EducationDto">
+    <select id="getAchievements" parameterType="com.spring.board.dto.AchievementsDto" resultType="com.spring.board.dto.AchievementsDto">
         SELECT seq
              ,  award
              ,  awardinfo
