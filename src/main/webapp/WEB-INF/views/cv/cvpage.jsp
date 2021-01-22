@@ -170,18 +170,18 @@
     \${eduEtc}
   </td>
 </tr></table>
-<button type="button" onclick="javascript:deleteEducation(\${eduSeq});">Delete</button>
+<button class="btn btn-dark" type="button" onclick="javascript:deleteEducation(\${eduSeq});">Delete</button>
 <br>
 `
                     }
                     $("#edu_tbody").html(html);
-                    html_button +=`<button type='button' onclick='javascript:goEducationWrite();'>New</button>`
+                    html_button +=`<button class='btn btn-dark' type='button' onclick='javascript:goEducationWrite();'>New</button>`
                     $("#button").html(html_button);
                 } else {
                     html += `<p>
                         Content does not exist
                     </p>
-                    <button type='button' onclick='javascript:goEducationWrite();'>New</button>
+                    <button class='btn btn-dark' type='button' onclick='javascript:goEducationWrite();'>New</button>
                     `
                     $("#eduNotExist").html(html);
                 }
@@ -194,10 +194,16 @@
 </head>
 <body>
 <div>
-    <input id="user_name" placeholder="Please enter your name"/>
-    <button type="button" onclick="javascript:registerName();">Register</button>
-    <h1>Doeun Lee</h1>
-    <button type="button" onclick="javascript:deleteName();">Delete</button>
+    <c:choose>
+        <c:when test="${empty userDto}">
+            <input id="user_name" placeholder="Please enter your name"/>
+            <button class="btn btn-dark" type="button" onclick="javascript:registerName();">Register</button>
+        </c:when>
+        <c:otherwise>
+            <h1>${userDto.name}</h1>
+            <button class="btn btn-dark" type="button" onclick="javascript:deleteName();">Delete</button>
+        </c:otherwise>
+    </c:choose>
 </div>
 <div>
     <br/>
@@ -219,7 +225,7 @@
         <p>
             Content does not exist
         </p>
-        <button>New</button>
+        <button class="btn btn-dark">New</button>
     </div>
     <div>
         <table class="table table-striped">

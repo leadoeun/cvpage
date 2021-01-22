@@ -24,13 +24,13 @@ public class CvController {
     private CvService cvService;
 
     @RequestMapping(value = "/cvpage")
-    public String cvpage(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView cvpage(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("cv/cvpage");
         UserDto userDto=cvService.getUser();
         modelAndView.addObject("userDto",userDto);
 
-        return "cv/cvpage";
+        return modelAndView;
     }
 
     @RequestMapping(value="/registerName")

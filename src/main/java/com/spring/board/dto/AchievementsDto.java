@@ -1,12 +1,30 @@
 package com.spring.board.dto;
 
 public class AchievementsDto {
+    private int seq;
     private String award;
     private String awardinfo;
     private String club;
     private String clubinfo;
     private String certification;
     private String certificationinfo;
+    private String result;
+
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
 
     public String getAward() {
         return award;
@@ -59,12 +77,14 @@ public class AchievementsDto {
     @Override
     public String toString() {
         return "AchievementsDto{" +
-                "Award='" + award + '\'' +
-                ", Awardinfo='" + awardinfo + '\'' +
-                ", Club='" + club + '\'' +
-                ", Clubinfo='" + clubinfo + '\'' +
-                ", Certification='" + certification + '\'' +
-                ", Certificationinfo='" + certificationinfo + '\'' +
+                "seq=" + seq +
+                ", award='" + award + '\'' +
+                ", awardinfo='" + awardinfo + '\'' +
+                ", club='" + club + '\'' +
+                ", clubinfo='" + clubinfo + '\'' +
+                ", certification='" + certification + '\'' +
+                ", certificationinfo='" + certificationinfo + '\'' +
+                ", result='" + result + '\'' +
                 '}';
     }
 }

@@ -76,4 +76,48 @@
         from education
         where seq=#{seq}
     </delete>
+
+    <select id="getAchievements" parameterType="com.spring.board.dto.AchievementsDto" resultType="com.spring.board.dto.EducationDto">
+        SELECT seq
+             ,  award
+             ,  awardinfo
+             ,  club
+             ,  clubinfo
+             ,  certification
+             ,  certificationinfo
+        From achievements
+    </select>
+
+    <insert id="insertAchievements" parameterType="com.spring.board.dto.AchievementsDto">
+        <selectKey resultType="int" keyProperty="seq" order="BEFORE">
+            SELECT IFNULL(MAX(SEQ),0)+1
+            FROM education
+        </selectKey>
+
+        INSERT
+        INTO achievements(
+        seq
+        ,  award
+        ,  awardinfo
+        ,  club
+        ,  clubinfo
+        ,  certification
+        ,  certificationinfo
+        )
+        values(
+        #{seq}
+        ,  #{award}
+        ,  #{awardinfo}
+        ,  #{club}
+        ,  #{clubinfo}
+        ,  #{certification}
+        ,  #{certificationinfo}
+        )
+
+    </insert>
+    <delete id="deleteAchievements" parameterType="com.spring.board.dto.AchievementsDto">
+        delete
+        from achievements
+        where seq=#{seq}
+    </delete>
 </mapper>
